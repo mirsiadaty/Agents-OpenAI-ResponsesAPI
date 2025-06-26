@@ -25,7 +25,7 @@ history_tutor_agent = Agent(
 
 ## creating orchestrator agent
 
-We then define a third agent, an orchestrator agent, which takes user's question, and decides which of the specilaized worker agents to call next.
+We then define a third agent, an orchestrator agent, which takes user's question, and decides which of the specialized worker agents to call next.
 
 ```
 triage_agent = Agent(
@@ -42,7 +42,7 @@ triage_agent = Agent(
 
 We create input guardrails to make sure the inputs to our agents are valid. For example, we might want to make sure that the user isn't trying to ask for help with problems that are not covered by our MAS multi agent system.
 
-Hene this MAS has four agents.
+Hence this MAS has four agents, {orchestrator agent, math agent, history agent, guardrail agent}.
 
 ```
 class HomeworkOutput(BaseModel):
