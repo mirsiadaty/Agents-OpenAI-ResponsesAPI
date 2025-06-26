@@ -42,6 +42,8 @@ triage_agent = Agent(
 
 We create input guardrails to make sure the inputs to our agents are valid. For example, we might want to make sure that the user isn't trying to ask for help with problems that are not covered by our MAS multi agent system.
 
+Hene this MAS has four agents.
+
 ```
 class HomeworkOutput(BaseModel):
     is_homework: bool
@@ -89,7 +91,10 @@ INFO:httpx:HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 
 INFO:httpx:HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
 INFO:httpx:HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
 
-The first president of the United States was George Washington. He served from 1789 to 1797. Washington was unanimously elected by the Electoral College and is often referred to as the \"Father of His Country\" for his leadership in the founding of the nation. Before becoming president, he played a pivotal role as the commander-in-chief of the Continental Army during the American Revolutionary War. Washington set many precedents for the new government, including the tradition of a two-term limit for presidents.
+The first president of the United States was George Washington. He served from 1789 to 1797.
+Washington was unanimously elected by the Electoral College and is often referred to as the \"Father of His Country\" for his leadership in the founding of the nation.
+Before becoming president, he played a pivotal role as the commander-in-chief of the Continental Army during the American Revolutionary War.
+Washington set many precedents for the new government, including the tradition of a two-term limit for presidents.
 ```
 
 
