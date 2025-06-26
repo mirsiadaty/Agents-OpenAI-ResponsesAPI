@@ -60,12 +60,37 @@ async def homework_guardrail(ctx, agent, input_data):
         output_info=final_output,
         tripwire_triggered=not final_output.is_homework,
     )
-
 ```
 
+## test the MAS: three questions
 
+We then send a set of questions to the MAS we just built. This set has three questions, where one is a history question, the second is a math, and the third one is a question that is beyond our MAS, hence we expect the guardrail to trip.
 
+```
+async def main():
+    result = await Runner.run(triage_agent, "who was the first president of the united states?")
+    print(result.final_output)
+    
+    result = await Runner.run(triage_agent, "Can you help me solve for x: 2x + 5 = 11")
+    print(result.final_output)
+    
+    result = await Runner.run(triage_agent, "what is life")
+    print(result.final_output)
+```
 
+## MAS response to the first question
+
+The following shows that our MAS is using the latest OpenAI API called Responses, to generate the answer to the history question:
+
+```
+22 Thu Jun 26 12:45:43 2025
+
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+
+The first president of the United States was George Washington. He served from 1789 to 1797. Washington was unanimously elected by the Electoral College and is often referred to as the \"Father of His Country\" for his leadership in the founding of the nation. Before becoming president, he played a pivotal role as the commander-in-chief of the Continental Army during the American Revolutionary War. Washington set many precedents for the new government, including the tradition of a two-term limit for presidents.
+```
 
 
 
