@@ -80,7 +80,7 @@ async def main():
     print(result.final_output)
 ```
 
-## MAS response to the first question
+## MAS response to the first question: history
 
 The following shows that our MAS is using the latest OpenAI API called Responses, to generate the answer to the history question:
 
@@ -96,6 +96,102 @@ Washington was unanimously elected by the Electoral College and is often referre
 Before becoming president, he played a pivotal role as the commander-in-chief of the Continental Army during the American Revolutionary War.
 Washington set many precedents for the new government, including the tradition of a two-term limit for presidents.
 ```
+
+## MAS response to the second question: math
+
+And here our MAS reasons and solves the algebraic formula given:
+
+```
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+
+Sure, let's solve the equation \(2x + 5 = 11\).
+
+### Step 1: Isolate the term with \(x\)
+First, we want to isolate the term that contains \(x\). To do this, we need to get rid of the constant term on the left side of the equation.
+
+\[
+2x + 5 = 11
+\]
+
+Subtract 5 from both sides:
+
+\[
+2x + 5 - 5 = 11 - 5
+\]
+
+This simplifies to:
+
+\[
+2x = 6
+\]
+
+### Step 2: Solve for \(x\)
+Now, divide both sides by 2 to solve for \(x\):
+
+\[
+\frac{2x}{2} = \frac{6}{2}
+\]
+
+This simplifies to:
+
+\[
+x = 3
+\]
+
+### Checking the solution
+To ensure our solution is correct, substitute \(x = 3\) back into the original equation:
+
+\[
+2(3) + 5 = 11
+\]
+
+This simplifies to:
+
+\[
+6 + 5 = 11
+\]
+
+Since both sides of the equation are equal, our solution \(x = 3\) is correct.
+
+### Example
+If we had a similar problem, such as \(3x + 4 = 13\), we would follow the same process:
+
+1. Subtract 4 from both sides:
+
+   \[
+   3x + 4 - 4 = 13 - 4
+   \]
+   
+   This simplifies to:
+   
+   \[
+   3x = 9
+   \]
+
+2. Divide both sides by 3:
+
+   \[
+   \frac{3x}{3} = \frac{9}{3}
+   \]
+   
+   This simplifies to:
+   
+   \[
+   x = 3
+   \]
+
+The solution, \(x = 3\), works when substituted back into the original equation.
+
+Let me know if you need further clarification!
+```
+
+## MAS response to the third question: out of scope
+
+'''
+
+'''
 
 
 
