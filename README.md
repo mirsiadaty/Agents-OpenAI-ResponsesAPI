@@ -8,7 +8,6 @@ The following graph is a depiction of the multi agent system created here:
 ![agent_graph_250627](https://github.com/user-attachments/assets/a52ad106-cbcb-4082-a07f-767e6f0a0ea1)
 
 <br>
-<br>
 
 ## creating specialized worker agents
 
