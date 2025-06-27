@@ -189,9 +189,100 @@ Let me know if you need further clarification!
 
 ## MAS response to the third question: out of scope
 
-'''
+The third question "what is life" is outside the scope of this MAS which covers history and math questions. We expect the guardrail agent to kick in, and trigger the tripwire, hence stopping the processing of user's question.
 
-'''
+The following python excpetion trace verifies this: "InputGuardrailTripwireTriggered: Guardrail InputGuardrail triggered tripwire"
 
+```
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+
+---------------------------------------------------------------------------
+InputGuardrailTripwireTriggered           Traceback (most recent call last)
+Cell In[9], line 6
+      1 print('22' , time.asctime( time.localtime( time.time() ) ))
+      5 if __name__ == "__main__":
+----> 6     await main()
+      7 #
+     11 '''
+     12 if __name__ == "__main__":
+     13     asyncio.run(main())
+   (...)
+     22     await my_async_function()
+     23 '''
+
+Cell In[8], line 8, in main()
+      5 result = await Runner.run(triage_agent, "Can you help me solve for x: 2x + 5 = 11")
+      6 print(result.final_output)
+----> 8 result = await Runner.run(triage_agent, "what is life")
+      9 print(result.final_output)
+
+File ~/virenv20250624/lib/python3.10/site-packages/agents/run.py:199, in Runner.run(cls, starting_agent, input, context, max_turns, hooks, run_config, previous_response_id)
+    172 """Run a workflow starting at the given agent. The agent will run in a loop until a final
+    173 output is generated. The loop runs like so:
+    174 1. The agent is invoked with the given input.
+   (...)
+    196     agent. Agents may perform handoffs, so we don't know the specific type of the output.
+    197 """
+    198 runner = DEFAULT_AGENT_RUNNER
+--> 199 return await runner.run(
+    200     starting_agent,
+    201     input,
+    202     context=context,
+    203     max_turns=max_turns,
+    204     hooks=hooks,
+    205     run_config=run_config,
+    206     previous_response_id=previous_response_id,
+    207 )
+
+File ~/virenv20250624/lib/python3.10/site-packages/agents/run.py:395, in AgentRunner.run(self, starting_agent, input, **kwargs)
+    390 logger.debug(
+    391     f"Running agent {current_agent.name} (turn {current_turn})",
+    392 )
+    394 if current_turn == 1:
+--> 395     input_guardrail_results, turn_result = await asyncio.gather(
+    396         self._run_input_guardrails(
+    397             starting_agent,
+    398             starting_agent.input_guardrails
+    399             + (run_config.input_guardrails or []),
+    400             copy.deepcopy(input),
+    401             context_wrapper,
+    402         ),
+    403         self._run_single_turn(
+    404             agent=current_agent,
+    405             all_tools=all_tools,
+    406             original_input=original_input,
+    407             generated_items=generated_items,
+    408             hooks=hooks,
+    409             context_wrapper=context_wrapper,
+    410             run_config=run_config,
+    411             should_run_agent_start_hooks=should_run_agent_start_hooks,
+    412             tool_use_tracker=tool_use_tracker,
+    413             previous_response_id=previous_response_id,
+    414         ),
+    415     )
+    416 else:
+    417     turn_result = await self._run_single_turn(
+    418         agent=current_agent,
+    419         all_tools=all_tools,
+   (...)
+    427         previous_response_id=previous_response_id,
+    428     )
+
+File ~/virenv20250624/lib/python3.10/site-packages/agents/run.py:1003, in AgentRunner._run_input_guardrails(cls, agent, guardrails, input, context)
+    996         t.cancel()
+    997     _error_tracing.attach_error_to_current_span(
+    998         SpanError(
+    999             message="Guardrail tripwire triggered",
+   1000             data={"guardrail": result.guardrail.get_name()},
+   1001         )
+   1002     )
+-> 1003     raise InputGuardrailTripwireTriggered(result)
+   1004 else:
+   1005     guardrail_results.append(result)
+
+InputGuardrailTripwireTriggered: Guardrail InputGuardrail triggered tripwire
+
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/responses "HTTP/1.1 200 OK"
+```
 
 
