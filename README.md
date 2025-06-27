@@ -3,9 +3,12 @@ multi-agent-system MAS via OpenAI's python Agents framework and Responses API
 
 The OpenAI Agents SDK and Responses API are new tools designed to simplify the creation of AI agents, which are systems that can independently perform tasks on your behalf. The Responses API (https://platform.openai.com/docs/api-reference/responses) is a foundational API for building agentic experiences, offering built-in tools and streamlined functionality, while the Agents SDK (https://openai.github.io/openai-agents-python/) provides a framework for orchestrating multiple agents to work together (https://openai.github.io/openai-agents-python/quickstart/). This combination allows developers to build complex, modular AI applications with less complexity.
 
+The following graph is a depiction of the multi agent system created here:
+
 ![agent_graph_250627](https://github.com/user-attachments/assets/a52ad106-cbcb-4082-a07f-767e6f0a0ea1)
 
-
+<br>
+<br>
 
 ## creating specialized worker agents
 
